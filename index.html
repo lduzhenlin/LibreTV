@@ -268,7 +268,7 @@
                     <strong class="text-blue-400">用户责任：</strong> 用户在使用本站服务时，须遵守相关法律法规，不得利用搜索结果从事侵权行为，如下载、传播未经授权的作品等。
                 </p>
                 <p>
-                    <strong class="text-blue-400">侵权投诉：</strong> 若您是版权方或相关权利人，发现搜索结果中存在侵犯您合法权益的内容，请通过 <a href="mailto:2608726760@qq.com" class="text-blue-400 hover:underline">2608726760@qq.com</a> 向我们反馈。我们将在收到投诉后尽快核实处理。
+                    <strong class="text-blue-400">侵权投诉：</strong> 若您是版权方或相关权利人，发现搜索结果中存在侵犯您合法权益的内容，请向我们反馈。我们将在收到投诉后尽快核实处理。
                 </p>
             </div>
             <div class="mt-6 flex justify-center">
@@ -316,24 +316,24 @@
     <!-- 弹窗显示脚本 -->
     <script>
         // 在页面加载完成后检查用户是否首次访问
-        document.addEventListener('DOMContentLoaded', function() {
+        //document.addEventListener('DOMContentLoaded', function() {
             // 检查用户是否已经看过声明
-            const hasSeenDisclaimer = localStorage.getItem('hasSeenDisclaimer');
+            //const hasSeenDisclaimer = localStorage.getItem('hasSeenDisclaimer');
             
-            if (!hasSeenDisclaimer) {
+           // if (!hasSeenDisclaimer) {
                 // 显示弹窗
-                const disclaimerModal = document.getElementById('disclaimerModal');
-                disclaimerModal.style.display = 'flex';
+                //const disclaimerModal = document.getElementById('disclaimerModal');
+               // disclaimerModal.style.display = 'flex';
                 
                 // 添加接受按钮事件
-                document.getElementById('acceptDisclaimerBtn').addEventListener('click', function() {
+                //document.getElementById('acceptDisclaimerBtn').addEventListener('click', function() {
                     // 保存用户已看过声明的状态
-                    localStorage.setItem('hasSeenDisclaimer', 'true');
+                   // localStorage.setItem('hasSeenDisclaimer', 'true');
                     // 隐藏弹窗
-                    disclaimerModal.style.display = 'none';
-                });
-            }
-        });
+                   // disclaimerModal.style.display = 'none';
+               // });
+            //}
+        //});
     </script>
 </body>
 </html>
