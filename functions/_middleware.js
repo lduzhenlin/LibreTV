@@ -8,23 +8,13 @@ export async function onRequest(context) {
   if (contentType.includes("text/html")) {
     let html = await response.text();
     
-    // 处理普通密码
-    const password = env.PASSWORD || "";
-    let passwordHash = "";
-    if (password) {
-      passwordHash = await sha256(password);
-    }
+    // 密码保护已禁用
     html = html.replace('window.__ENV__.PASSWORD = "{{PASSWORD}}";', 
-      `window.__ENV__.PASSWORD = "${passwordHash}";`);
+      `window.__ENV__.PASSWORD = ""; // 密码保护已禁用`);
 
-    // 处理管理员密码 - 确保这部分代码被执行
-    const adminPassword = env.ADMINPASSWORD || "";
-    let adminPasswordHash = "";
-    if (adminPassword) {
-      adminPasswordHash = await sha256(adminPassword);
-    }
+    // 管理员密码保护已禁用
     html = html.replace('window.__ENV__.ADMINPASSWORD = "{{ADMINPASSWORD}}";',
-      `window.__ENV__.ADMINPASSWORD = "${adminPasswordHash}";`);
+      `window.__ENV__.ADMINPASSWORD = ""; // 密码保护已禁用`);
     
     return new Response(html, {
       headers: response.headers,

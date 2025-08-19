@@ -4,7 +4,7 @@ const PROXY_URL = '/proxy/';    // 适用于 Cloudflare, Netlify (带重写), Ve
 const SEARCH_HISTORY_KEY = 'videoSearchHistory';
 const MAX_HISTORY_ITEMS = 5;
 
-// 密码保护配置
+// 密码保护配置 - 已禁用
 const PASSWORD_CONFIG = {
     localStorageKey: 'passwordVerified',  // 存储验证状态的键名
     verificationTTL: 90 * 24 * 60 * 60 * 1000,  // 验证有效期（90天，约3个月）

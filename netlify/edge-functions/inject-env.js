@@ -28,16 +28,10 @@ export default async (request, context) => {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
   
-  // Replace the placeholder with actual environment variable
-  const password = Netlify.env.get('PASSWORD') || '';
-  let passwordHash = '';
-  if (password) {
-    passwordHash = await sha256(password);
-  }
-  
+  // 密码保护已禁用
   const modifiedHtml = originalHtml.replace(
     'window.__ENV__.PASSWORD = "{{PASSWORD}}";',
-    `window.__ENV__.PASSWORD = "${passwordHash}"; // SHA-256 hash`
+    `window.__ENV__.PASSWORD = ""; // 密码保护已禁用`
   );
   
   // Create a new response with the modified HTML

@@ -490,21 +490,11 @@ function toggleSettings(e) {
     const settingsPanel = document.getElementById('settingsPanel');
     if (!settingsPanel) return;
 
-    // 检查是否有管理员密码
-    const hasAdminPassword = window.__ENV__?.ADMINPASSWORD && 
-                           window.__ENV__.ADMINPASSWORD.length === 64 && 
-                           !/^0+$/.test(window.__ENV__.ADMINPASSWORD);
+    // 密码保护已禁用
 
     if (settingsPanel.classList.contains('show')) {
         settingsPanel.classList.remove('show');
     } else {
-        // 只有设置了管理员密码且未验证时才拦截
-        if (hasAdminPassword && !isAdminVerified()) {
-            e.preventDefault();
-            e.stopPropagation();
-            showAdminPasswordModal();
-            return;
-        }
         settingsPanel.classList.add('show');
     }
 
@@ -623,13 +613,7 @@ function getCustomApiInfo(customApiIndex) {
 
 // 搜索功能 - 修改为支持多选API和多页结果
 async function search() {
-    // 密码保护校验
-    if (window.isPasswordProtected && window.isPasswordVerified) {
-        if (window.isPasswordProtected() && !window.isPasswordVerified()) {
-            showPasswordModal && showPasswordModal();
-            return;
-        }
-    }
+    // 密码保护已禁用
     const query = document.getElementById('searchInput').value.trim();
 
     if (!query) {
@@ -864,13 +848,7 @@ document.addEventListener('DOMContentLoaded', hookInput);
 
 // 显示详情 - 修改为支持自定义API
 async function showDetails(id, vod_name, sourceCode) {
-    // 密码保护校验
-    if (window.isPasswordProtected && window.isPasswordVerified) {
-        if (window.isPasswordProtected() && !window.isPasswordVerified()) {
-            showPasswordModal && showPasswordModal();
-            return;
-        }
-    }
+    // 密码保护已禁用
     if (!id) {
         showToast('视频ID无效', 'error');
         return;
@@ -996,13 +974,7 @@ async function showDetails(id, vod_name, sourceCode) {
 
 // 更新播放视频函数，修改为使用/watch路径而不是直接打开player.html
 function playVideo(url, vod_name, sourceCode, episodeIndex = 0, vodId = '') {
-    // 密码保护校验
-    if (window.isPasswordProtected && window.isPasswordVerified) {
-        if (window.isPasswordProtected() && !window.isPasswordVerified()) {
-            showPasswordModal && showPasswordModal();
-            return;
-        }
-    }
+    // 密码保护已禁用
 
     // 获取当前路径作为返回页面
     let currentPath = window.location.href;

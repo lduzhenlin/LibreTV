@@ -23,29 +23,19 @@ export default async function middleware(request) {
   // Get the HTML content
   const originalHtml = await response.text();
   
-  // Replace the placeholder with actual environment variable
-  // If PASSWORD is not set, replace with empty string
-  const password = process.env.PASSWORD || '';
-  let passwordHash = '';
-  if (password) {
-    passwordHash = await sha256(password);
-  }
-
-  const adminpassword = process.env.ADMINPASSWORD || '';
-  let adminpasswordHash = '';
-  if (adminpassword) {
-    adminpasswordHash = await sha256(adminpassword); // 修复变量名
-  }
+  // 密码保护已禁用
+  const passwordHash = '';
+  const adminpasswordHash = '';
   
-  // 合并两次替换为一次操作
+  // 替换为空的密码值
   let modifiedHtml = originalHtml
     .replace(
       'window.__ENV__.PASSWORD = "{{PASSWORD}}";',
-      `window.__ENV__.PASSWORD = "${passwordHash}"; // SHA-256 hash`
+      `window.__ENV__.PASSWORD = ""; // 密码保护已禁用`
     )
     .replace(
       'window.__ENV__.ADMINPASSWORD = "{{ADMINPASSWORD}}";',
-      `window.__ENV__.ADMINPASSWORD = "${adminpasswordHash}"; // SHA-256 hash`
+      `window.__ENV__.ADMINPASSWORD = ""; // 密码保护已禁用`
     );
 
   // 修复Response构造
