@@ -14,8 +14,8 @@ const __dirname = path.dirname(__filename);
 
 const config = {
   port: process.env.PORT || 8080,
-  password: process.env.PASSWORD || '',
-  adminpassword: process.env.ADMINPASSWORD || '',
+  password: '', // 禁用密码保护
+  adminpassword: '', // 禁用管理员密码保护
   corsOrigin: process.env.CORS_ORIGIN || '*',
   timeout: parseInt(process.env.REQUEST_TIMEOUT || '5000'),
   maxRetries: parseInt(process.env.MAX_RETRIES || '2'),
