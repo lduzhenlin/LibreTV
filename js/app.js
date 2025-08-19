@@ -1,5 +1,5 @@
 // 全局变量
-let selectedAPIs = JSON.parse(localStorage.getItem('selectedAPIs') || '["tyyszy","dyttzy", "bfzy", "ruyi"]'); // 默认选中资源
+let selectedAPIs = JSON.parse(localStorage.getItem('selectedAPIs') || '[]'); // 默认选中资源，空数组表示全选
 let customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]'); // 存储自定义API列表
 
 // 添加当前播放的集数索引
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 设置默认API选择（如果是第一次加载）
     if (!localStorage.getItem('hasInitializedDefaults')) {
-        // 默认选中资源
-        selectedAPIs = ["tyyszy", "bfzy", "dyttzy", "ruyi"];
+        // 默认选中资源 - 全选所有普通资源
+        selectedAPIs = Object.keys(API_SITES).filter(key => !API_SITES[key].adult);
         localStorage.setItem('selectedAPIs', JSON.stringify(selectedAPIs));
 
         // 默认选中过滤开关
@@ -59,6 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 初始检查成人API选中状态
     setTimeout(checkAdultAPIsSelected, 100);
+    
+    // 如果selectedAPIs为空数组，更新为当前选中的API
+    if (selectedAPIs.length === 0) {
+        updateSelectedAPIs();
+    }
 });
 
 // 初始化API复选框
@@ -80,7 +85,8 @@ function initAPICheckboxes() {
         const api = API_SITES[apiKey];
         if (api.adult) return; // 跳过成人内容API，稍后添加
 
-        const checked = selectedAPIs.includes(apiKey);
+        // 如果selectedAPIs为空数组，默认勾选所有普通资源
+        const checked = selectedAPIs.length === 0 || selectedAPIs.includes(apiKey);
 
         const checkbox = document.createElement('div');
         checkbox.className = 'flex items-center';
